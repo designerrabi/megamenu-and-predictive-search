@@ -1,0 +1,1496 @@
+
+{%- style -%}
+:root {
+  --pl-text: #111;
+  --pl-green: #008a00;
+  --pl-panel: #f4f4f1;
+  --pl-border: #d7d7d2;
+}
+
+.pl-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  width: 100%;
+  background: #fff;
+  color: var(--pl-text);
+  border-bottom: 1px solid #d9d9d9;
+  isolation: isolate;
+}
+
+.pl-header-inner {
+  min-height: 64px;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 36px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 160px minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.pl-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.pl-nav-right .pl-nav-list {
+  justify-content: flex-end;
+}
+
+.pl-nav-item {
+  position: static;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.pl-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #111;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.pl-nav-link svg {
+  width: 18px;
+  height: 18px;
+  transition: .25s;
+}
+
+.pl-nav-item:hover .pl-nav-link svg {
+  transform: rotate(180deg);
+}
+
+.pl-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pl-logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #111;
+}
+
+.pl-logo img {
+  width: {{ section.settings.logo_width }}px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.pl-logo-text {
+  font-size: 24px;
+  font-weight: 900;
+  color: #111;
+}
+
+.pl-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pl-icon {
+  color: #111;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+}
+
+.pl-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.pl-cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--pl-green);
+  color: #fff;
+  font-size: 10px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.pl-arrow-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.pl-arrow-icon svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+  transition: transform .25s ease;
+}
+
+.pl-acc-title.is-open > .pl-arrow-icon svg {
+  transform: rotate(90deg);
+}
+
+.pl-predict-view-all {
+  align-items: center;
+  gap: 4px;
+}
+
+.pl-predict-view-all .pl-arrow-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Mega */
+.pl-nav-item:hover > .pl-mega {
+  display: block;
+}
+
+.pl-mega {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  z-index: 9999;
+}
+
+.pl-mega-box {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  background: #fff;
+  display: grid;
+  grid-template-columns: 452px minmax(0, 1fr);
+  border-radius: 0 0 18px 18px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .18);
+  min-height: 520px;
+}
+
+.pl-mega-side {
+  background: var(--pl-panel);
+  padding: 52px 50px;
+  transform: translateX(-16px);
+  opacity: 0;
+  transition: transform .32s ease, opacity .32s ease;
+}
+
+.pl-nav-item:hover > .pl-mega .pl-mega-side {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.pl-side-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #222;
+  text-decoration: none;
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 700;
+  padding: 27px 0;
+  border-bottom: 1px solid #171717;
+}
+
+.pl-side-link.active,
+.pl-side-link:hover {
+  color: var(--pl-green);
+}
+
+.pl-side-btn {
+  display: block;
+  margin-top: 42px;
+  background: var(--pl-green);
+  color: #fff !important;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 15px 24px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.pl-products-wrap {
+  min-width: 0;
+}
+
+.pl-products {
+  padding: 40px 36px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.pl-mega-panel {
+  display: none;
+}
+
+.pl-mega-panel.active {
+  display: grid;
+  animation: plMegaSlide .32s ease both;
+}
+
+@keyframes plMegaSlide {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.pl-mega-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 14px;
+  color: #777;
+}
+
+.pl-product-card {
+  color: #222;
+  text-decoration: none;
+  display: block;
+}
+
+.pl-product-img {
+  background: #f4f0f8;
+  border-radius: 18px;
+  aspect-ratio: 1 / .78;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.pl-product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .35s ease;
+}
+
+.pl-product-card:hover img {
+  transform: scale(1.04);
+}
+
+.pl-product-card h3 {
+  margin: 24px 0 8px;
+  font-size: 22px;
+  line-height: 1.18;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.pl-product-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #4f5158;
+  line-height: 1.35;
+}
+
+.pl-desktop-search-input:focus,
+.pl-desktop-search-input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 1300px) {
+  .pl-mega-box {
+    grid-template-columns: 360px minmax(0, 1fr);
+    min-height: 560px;
+  }
+
+  .pl-mega-side {
+    padding: 42px 38px;
+  }
+
+  .pl-side-link {
+    font-size: 21px;
+    padding: 22px 0;
+  }
+
+  .pl-products {
+    padding: 32px 26px;
+    gap: 20px;
+  }
+
+  .pl-product-card h3 {
+    font-size: 18px;
+  }
+
+  .pl-product-card p {
+    font-size: 16px;
+  }
+}
+
+/* Desktop search */
+.pl-desktop-search-wrap {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  min-height: 74px;
+  background: #fff;
+  z-index: 2147483000;
+  align-items: center;
+  padding: 12px 36px;
+  gap: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+}
+
+.pl-desktop-search-wrap.active {
+  display: flex;
+}
+
+.pl-desktop-search-form {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 46px;
+  border: 2px solid #111;
+  border-radius: 999px;
+  padding: 0 20px;
+  gap: 12px;
+  background: #fff;
+}
+
+.pl-desktop-search-form svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: #111;
+}
+
+.pl-desktop-search-input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  font-weight: 500;
+  background: transparent;
+  min-width: 0;
+}
+
+.pl-desktop-search-input::placeholder {
+  color: #999;
+}
+
+.pl-desktop-search-clear {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  color: #555;
+  padding: 0;
+  display: none;
+}
+
+.pl-desktop-search-clear.visible {
+  display: block;
+}
+
+.pl-desktop-search-close {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-size: 34px;
+  line-height: 1;
+  color: #111;
+  padding: 0 0 0 8px;
+  flex-shrink: 0;
+}
+
+.pl-desktop-predictive {
+  position: fixed;
+  top: 74px;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .15);
+  border-radius: 0 0 18px 18px;
+  z-index: 2147482999;
+  display: none;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.pl-desktop-predictive.active {
+  display: block;
+}
+
+.pl-desktop-predict-inner {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 24px 36px 30px;
+}
+
+.pl-desktop-predict-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 16px;
+}
+
+.pl-desktop-predict-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.pl-desktop-predict-item {
+  text-decoration: none;
+  color: #222;
+  display: block;
+}
+
+.pl-desktop-predict-img {
+  background: #f4f0f8;
+  border-radius: 12px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pl-desktop-predict-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform .3s ease;
+}
+
+.pl-desktop-predict-item:hover img {
+  transform: scale(1.04);
+}
+
+.pl-desktop-predict-item h4 {
+  margin: 10px 0 4px;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.pl-predict-price {
+  font-size: 13px;
+  color: #555;
+}
+
+.pl-predict-price s {
+  margin-right: 4px;
+  color: #999;
+}
+
+.pl-predict-price strong {
+  color: #111;
+  font-weight: 800;
+}
+
+.pl-desktop-predict-status {
+  padding: 20px 0;
+  font-size: 14px;
+  color: #aaa;
+  text-align: center;
+}
+
+.pl-predict-view-all {
+  display: none;
+  margin-top: 18px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--pl-green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Mobile */
+.pl-mobile {
+  display: none;
+}
+
+.pl-drawer-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  z-index: 199;
+}
+
+.pl-drawer {
+  position: fixed;
+  right: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: 200;
+  transition: .35s ease;
+  overflow: auto;
+}
+
+.pl-drawer.active {
+  right: 0;
+}
+
+@media (max-width: 989px) {
+  .pl-desktop {
+    display: none;
+  }
+
+  .pl-mobile {
+    background: #fff;
+    padding: 10px 24px 16px;
+    min-height: 70px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  .pl-mobile .pl-logo {
+    justify-content: flex-start;
+  }
+
+  .pl-mobile-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .pl-hamburger {
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .pl-hamburger span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: #111;
+    margin: 5px 0;
+  }
+
+  .pl-drawer-inner {
+    background: #f5f5f3;
+    min-height: 100%;
+  }
+
+  .pl-mobile-menu-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 800;
+    padding: 22px 0;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    background: #fff;
+  }
+
+  .pl-mobile-menu-title button {
+    position: absolute;
+    right: 22px;
+    top: 15px;
+    background: none;
+    border: 0;
+    font-size: 42px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .pl-mobile-search {
+    padding: 22px 22px 0;
+    background: #f5f5f3;
+  }
+
+  .pl-search-field {
+    height: 62px;
+    border: 1.5px solid #111;
+    border-radius: 999px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 20px;
+  }
+
+  .pl-search-field svg {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+  }
+
+  .pl-search-field input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    font-size: 20px;
+    background: transparent;
+    min-width: 0;
+  }
+
+  .pl-search-field input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+  }
+
+  .pl-search-clear {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 0;
+    font-size: 34px;
+    line-height: 1;
+    cursor: pointer;
+    color: #555;
+    padding: 0;
+  }
+
+  .pl-search-results {
+    display: none;
+    background: #fff;
+    margin: 0 22px;
+    border-radius: 0 0 18px 18px;
+    padding: 18px 24px 24px;
+  }
+
+  .pl-search-results.active {
+    display: block;
+  }
+
+  .pl-search-result-item {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 18px;
+    align-items: center;
+    text-decoration: none;
+    color: #222;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .pl-search-result-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .pl-search-result-item img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    background: #f4f4f1;
+    border-radius: 10px;
+  }
+
+  .pl-search-result-item h4 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    line-height: 1.25;
+    font-weight: 800;
+  }
+
+  .pl-price {
+    font-size: 18px;
+  }
+
+  .pl-price s {
+    color: #888;
+    margin-right: 6px;
+    font-size: 15px;
+  }
+
+  .pl-price strong {
+    font-weight: 900;
+  }
+
+  .pl-search-status {
+    padding: 24px 10px;
+    text-align: center;
+    font-size: 16px;
+    color: #aaa;
+  }
+
+  .pl-mobile-menu-card {
+    margin-top: 8px;
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    padding: 28px 24px;
+  }
+
+  .pl-mobile-heading {
+    font-size: 26px;
+    font-weight: 800;
+    margin: 0 0 24px;
+  }
+
+  .pl-mobile-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pl-acc-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 800;
+    border: 0;
+    padding: 18px 0;
+    background: none;
+    cursor: pointer;
+    color: #111;
+    text-decoration: none !important;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .pl-acc-title span {
+    text-decoration: none !important;
+  }
+
+  .pl-submenu {
+    display: none;
+    padding: 0;
+  }
+
+  .pl-mobile-products {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 24px;
+    padding: 6px 0 24px;
+  }
+
+  .pl-mobile-product-card {
+    text-decoration: none;
+    color: #202020;
+  }
+
+  .pl-mobile-product-img {
+    background: #f4f0f8;
+    border-radius: 16px;
+    aspect-ratio: 1 / .78;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .pl-mobile-product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .pl-mobile-product-card h4 {
+    margin: 18px 0 6px;
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 800;
+  }
+
+  .pl-mobile-product-card p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.35;
+    color: #555965;
+  }
+
+  .pl-desktop-search-input:focus,
+  .pl-desktop-search-input:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+{%- endstyle -%}
+
+{%- capture pl_arrow_svg -%}
+  <span class="pl-arrow-icon" aria-hidden="true">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9.705 6L8.295 7.41L12.875 12L8.295 16.59L9.705 18L15.705 12L9.705 6Z" fill="currentColor"></path>
+    </svg>
+  </span>
+{%- endcapture -%}
+
+<header class="pl-header">
+  <div class="pl-header-inner pl-desktop" id="plDesktopInner">
+    <nav class="pl-nav-left">
+      <ul class="pl-nav-list">
+        {% for block in section.blocks %}
+          {% if block.type == 'menu_left' and block.settings.menu != blank %}
+            {% for link in block.settings.menu.links %}
+              <li class="pl-nav-item">
+                <a href="{{ link.url }}" class="pl-nav-link">
+                  {{ link.title }}
+                  {% if link.links != blank %}
+                    {% render 'pl-chevron' %}
+                  {% endif %}
+                </a>
+               {% render 'pl-mega-menu',
+  link: link,
+  shop_all_link: section.settings.shop_all_link,
+  shop_all_text: section.settings.shop_all_text
+%}
+              </li>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <div class="pl-logo">
+      <a href="{{ routes.root_url }}">
+        {% if section.settings.logo != blank %}
+          <img
+            src="{{ section.settings.logo | image_url: width: 400 }}"
+            alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+            width="{{ section.settings.logo_width }}"
+          >
+        {% else %}
+          <span class="pl-logo-text">{{ shop.name }}</span>
+        {% endif %}
+      </a>
+    </div>
+
+    <nav class="pl-nav-right">
+      <ul class="pl-nav-list">
+        {% for block in section.blocks %}
+          {% if block.type == 'menu_right' and block.settings.menu != blank %}
+            {% for link in block.settings.menu.links %}
+              <li class="pl-nav-item">
+                <a href="{{ link.url }}" class="pl-nav-link">
+                  {{ link.title }}
+                  {% if link.links != blank %}
+                    {% render 'pl-chevron' %}
+                  {% endif %}
+                </a>
+                {% render 'pl-mega-menu', link: link %}
+              </li>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+
+        <li class="pl-icons">
+          <button type="button" class="pl-icon" aria-label="Search" data-pl-open-search onclick="window.plOpenDesktopSearch()">
+            {% render 'pl-search-icon' %}
+          </button>
+
+          <a href="{{ routes.cart_url }}" class="pl-icon" aria-label="Cart">
+            {% render 'pl-cart-icon' %}
+            <span class="pl-cart-count">{{ cart.item_count }}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="pl-desktop-search-wrap" id="plDesktopSearchWrap">
+    <form action="{{ routes.search_url }}" method="get" class="pl-desktop-search-form" autocomplete="off">
+      {% render 'pl-search-icon' %}
+      <input
+        type="search"
+        name="q"
+        id="plDesktopSearchInput"
+        class="pl-desktop-search-input"
+        placeholder="Search products..."
+        autocomplete="off"
+        oninput="window.plDeskInput(this.value)"
+      >
+      <input name="options[prefix]" type="hidden" value="last">
+      <button type="button" class="pl-desktop-search-clear" id="plDeskClear" onclick="window.plDeskClearFn()" aria-label="Clear">×</button>
+    </form>
+
+    <button type="button" class="pl-desktop-search-close" onclick="window.plCloseDesktopSearch()" aria-label="Close">×</button>
+  </div>
+
+  <div class="pl-desktop-predictive" id="plDeskPred">
+    <div class="pl-desktop-predict-inner">
+      <div class="pl-desktop-predict-label" id="plDeskLabel"></div>
+      <div class="pl-desktop-predict-grid" id="plDeskGrid"></div>
+      <div class="pl-desktop-predict-status" id="plDeskStatus"></div>
+      <a href="#" class="pl-predict-view-all" id="plDeskViewAll">View all results {{ pl_arrow_svg }}</a>
+    </div>
+  </div>
+
+  <div class="pl-mobile">
+    <div class="pl-logo">
+      <a href="{{ routes.root_url }}">
+        {% if section.settings.logo != blank %}
+          <img
+            src="{{ section.settings.logo | image_url: width: 260 }}"
+            alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+            width="{{ section.settings.logo_width }}"
+          >
+        {% else %}
+          <span class="pl-logo-text">{{ shop.name }}</span>
+        {% endif %}
+      </a>
+    </div>
+
+    <div class="pl-mobile-actions">
+      <button type="button" class="pl-icon" aria-label="Search" onclick="window.plToggleDrawer(true)">
+        {% render 'pl-search-icon' %}
+      </button>
+
+      <a href="{{ routes.cart_url }}" class="pl-icon" aria-label="Cart">
+        {% render 'pl-cart-icon' %}
+        <span class="pl-cart-count">{{ cart.item_count }}</span>
+      </a>
+
+      <button type="button" class="pl-hamburger" onclick="window.plToggleDrawer()" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="pl-drawer-overlay" id="plOverlay" onclick="window.plToggleDrawer()"></div>
+
+<div class="pl-drawer" id="plDrawer">
+  <div class="pl-drawer-inner">
+    <div class="pl-mobile-menu-title">
+      Menu
+      <button type="button" onclick="window.plToggleDrawer()">×</button>
+    </div>
+
+    <div class="pl-mobile-search">
+      <div class="pl-search-field">
+        {% render 'pl-search-icon' %}
+        <input type="search" id="plMobInput" placeholder="Search..." oninput="window.plMobileSearch(this.value)" autocomplete="off">
+        <button type="button" class="pl-search-clear" onclick="window.plClearSearch()" aria-label="Clear">×</button>
+      </div>
+    </div>
+
+    <div class="pl-search-results" id="plMobResults">
+      <div class="pl-search-status" id="plMobStatus"></div>
+      <div id="plMobInner"></div>
+    </div>
+
+    <div class="pl-mobile-menu-card" id="plMobMenu">
+      <h2 class="pl-mobile-heading">Shop Now</h2>
+      <ul class="pl-mobile-menu">
+        {% for block in section.blocks %}
+          {% if block.type == 'menu_left' or block.type == 'menu_right' %}
+            {% if block.settings.menu != blank %}
+              {% for link in block.settings.menu.links %}
+                <li>
+                  {% if link.links != blank %}
+                    <button type="button" class="pl-acc-title" onclick="window.plToggleSubmenu(this)">
+                      {{ link.title }}
+                      {{ pl_arrow_svg }}
+                    </button>
+
+                    <div class="pl-submenu">
+                      {% for child_link in link.links %}
+                        {% if child_link.type == 'collection_link' and child_link.object != blank %}
+                          <button type="button" class="pl-acc-title" onclick="window.plToggleSubmenu(this)" style="font-size:20px;">
+                            {{ child_link.title }}
+                            {{ pl_arrow_svg }}
+                          </button>
+
+                          <div class="pl-submenu">
+                            <div class="pl-mobile-products">
+                              {% for product in child_link.object.products limit: 4 %}
+                                <a href="{{ product.url }}" class="pl-mobile-product-card">
+                                  <div class="pl-mobile-product-img">
+                                    {% if product.featured_image %}
+                                      <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
+                                    {% endif %}
+                                  </div>
+                                  <h4>{{ product.title }}</h4>
+                                  <p>{{ product.description | strip_html | truncate: 55 }}</p>
+                                </a>
+                              {% endfor %}
+                            </div>
+                          </div>
+                        {% elsif child_link.links != blank %}
+                          <button type="button" class="pl-acc-title" onclick="window.plToggleSubmenu(this)" style="font-size:20px;">
+                            {{ child_link.title }}
+                            {{ pl_arrow_svg }}
+                          </button>
+
+                          <div class="pl-submenu">
+                            {% for grand_link in child_link.links %}
+                              {% if grand_link.type == 'collection_link' and grand_link.object != blank %}
+                                <button type="button" class="pl-acc-title" onclick="window.plToggleSubmenu(this)" style="font-size:18px;">
+                                  {{ grand_link.title }}
+                                  {{ pl_arrow_svg }}
+                                </button>
+
+                                <div class="pl-submenu">
+                                  <div class="pl-mobile-products">
+                                    {% for product in grand_link.object.products limit: 4 %}
+                                      <a href="{{ product.url }}" class="pl-mobile-product-card">
+                                        <div class="pl-mobile-product-img">
+                                          {% if product.featured_image %}
+                                            <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
+                                          {% endif %}
+                                        </div>
+                                        <h4>{{ product.title }}</h4>
+                                        <p>{{ product.description | strip_html | truncate: 55 }}</p>
+                                      </a>
+                                    {% endfor %}
+                                  </div>
+                                </div>
+                              {% else %}
+                                <a href="{{ grand_link.url }}" class="pl-acc-title" style="font-size:18px;">
+                                  {{ grand_link.title }}
+                                  {{ pl_arrow_svg }}
+                                </a>
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                        {% else %}
+                          <a href="{{ child_link.url }}" class="pl-acc-title" style="font-size:20px;">
+                            {{ child_link.title }}
+                            {{ pl_arrow_svg }}
+                          </a>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    <a href="{{ link.url }}" class="pl-acc-title">
+                      {{ link.title }}
+                      {{ pl_arrow_svg }}
+                    </a>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var arrowSvg = '<span class="pl-arrow-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.705 6L8.295 7.41L12.875 12L8.295 16.59L9.705 18L15.705 12L9.705 6Z" fill="currentColor"></path></svg></span>';
+
+  function esc(s) {
+    return (s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function money(cents) {
+    if (typeof Shopify !== 'undefined' && Shopify.formatMoney) {
+      return Shopify.formatMoney(cents, {{ shop.money_format | json }});
+    }
+
+    return '$' + (Number(cents) / 100).toFixed(2);
+  }
+
+  function imgUrl(image, size) {
+    if (!image) return '';
+
+    var url = typeof image === 'string' ? image : (image.url || image.src || '');
+    if (!url) return '';
+
+    return url.replace(/(\.[^.?]+)(\?.*)?$/, '_' + size + '$1$2');
+  }
+
+  function productPrice(p) {
+    var price = Number(p.price_min || p.price || 0);
+    var compare = Number(p.compare_at_price_min || 0);
+
+    if (compare > price && price > 0) {
+      return '<s>' + money(compare) + '</s><strong>' + money(price) + '</strong>';
+    }
+
+    if (price > 0) {
+      return '<strong>' + money(price) + '</strong>';
+    }
+
+    return '';
+  }
+
+  function renderItem(p, mobile) {
+    var img = imgUrl(p.featured_image, '400x400');
+    var imgTag = img ? '<img src="' + img + '" alt="' + esc(p.title) + '" loading="lazy">' : '';
+    var href = p.url || ('/products/' + (p.handle || ''));
+
+    if (mobile) {
+      return '<a href="' + href + '" class="pl-search-result-item">'
+        + imgTag
+        + '<div><h4>' + esc(p.title) + '</h4><div class="pl-price">' + productPrice(p) + '</div></div>'
+        + '</a>';
+    }
+
+    return '<a href="' + href + '" class="pl-desktop-predict-item">'
+      + '<div class="pl-desktop-predict-img">' + imgTag + '</div>'
+      + '<h4>' + esc(p.title) + '</h4>'
+      + '<div class="pl-predict-price">' + productPrice(p) + '</div>'
+      + '</a>';
+  }
+
+  function suggest(q, cb) {
+    fetch('/search/suggest.json?q=' + encodeURIComponent(q)
+      + '&resources[type]=product'
+      + '&resources[limit]=10'
+      + '&resources[options][unavailable_products]=show'
+      + '&resources[options][fields]=title,body,product_type,variants.title,vendor')
+      .then(function(r) {
+        return r.json();
+      })
+      .then(function(data) {
+        var products = (data && data.resources && data.resources.results && data.resources.results.products) || [];
+        cb(null, products);
+      })
+      .catch(function(e) {
+        cb(e, []);
+      });
+  }
+
+  var deskOpen = false;
+  var deskTimer = null;
+  var mobTimer = null;
+
+  window.plOpenDesktopSearch = function() {
+    var inner = document.getElementById('plDesktopInner');
+    var wrap = document.getElementById('plDesktopSearchWrap');
+
+    if (!inner || !wrap) return;
+
+    document.documentElement.classList.add('pl-search-is-open');
+    inner.style.display = 'none';
+    wrap.classList.add('active');
+    deskOpen = true;
+
+    var inp = document.getElementById('plDesktopSearchInput');
+    if (inp) {
+      setTimeout(function() {
+        inp.focus();
+      }, 60);
+    }
+  };
+
+  window.plCloseDesktopSearch = function() {
+    var inner = document.getElementById('plDesktopInner');
+    var wrap = document.getElementById('plDesktopSearchWrap');
+    var pred = document.getElementById('plDeskPred');
+    var inp = document.getElementById('plDesktopSearchInput');
+    var clr = document.getElementById('plDeskClear');
+
+    if (!inner || !wrap) return;
+
+    document.documentElement.classList.remove('pl-search-is-open');
+    wrap.classList.remove('active');
+    inner.style.display = '';
+
+    if (pred) pred.classList.remove('active');
+    if (inp) inp.value = '';
+    if (clr) clr.classList.remove('visible');
+
+    deskOpen = false;
+  };
+
+  window.plDeskClearFn = function() {
+    var inp = document.getElementById('plDesktopSearchInput');
+    var pred = document.getElementById('plDeskPred');
+    var clr = document.getElementById('plDeskClear');
+
+    if (inp) {
+      inp.value = '';
+      inp.focus();
+    }
+
+    if (pred) pred.classList.remove('active');
+    if (clr) clr.classList.remove('visible');
+  };
+
+  window.plDeskInput = function(value) {
+    var q = (value || '').trim();
+    var clr = document.getElementById('plDeskClear');
+    var pred = document.getElementById('plDeskPred');
+
+    if (clr) clr.classList.toggle('visible', q.length > 0);
+
+    clearTimeout(deskTimer);
+
+    if (q.length < 1) {
+      if (pred) pred.classList.remove('active');
+      return;
+    }
+
+    deskTimer = setTimeout(function() {
+      var grid = document.getElementById('plDeskGrid');
+      var label = document.getElementById('plDeskLabel');
+      var status = document.getElementById('plDeskStatus');
+      var viewAll = document.getElementById('plDeskViewAll');
+
+      if (pred) pred.classList.add('active');
+      if (grid) grid.innerHTML = '';
+      if (status) status.textContent = 'Searching...';
+      if (label) label.textContent = '';
+      if (viewAll) viewAll.style.display = 'none';
+
+      suggest(q, function(err, products) {
+        if (status) status.textContent = '';
+
+        if (err) {
+          if (status) status.textContent = 'Press Enter to search';
+          return;
+        }
+
+        if (!products.length) {
+          if (status) status.textContent = 'No results found for "' + q + '"';
+          return;
+        }
+
+        if (label) label.textContent = 'Results for "' + q + '"';
+        if (grid) grid.innerHTML = products.slice(0, 8).map(function(p) { return renderItem(p, false); }).join('');
+
+        if (viewAll) {
+          viewAll.href = '/search?q=' + encodeURIComponent(q) + '&type=product&options[prefix]=last';
+          viewAll.style.display = 'inline-flex';
+        }
+      });
+    }, 250);
+  };
+
+  window.plToggleDrawer = function(focusSearch) {
+    var drawer = document.getElementById('plDrawer');
+    var overlay = document.getElementById('plOverlay');
+
+    if (!drawer || !overlay) return;
+
+    drawer.classList.toggle('active');
+    overlay.style.display = drawer.classList.contains('active') ? 'block' : 'none';
+    document.body.style.overflow = drawer.classList.contains('active') ? 'hidden' : '';
+
+    if (drawer.classList.contains('active') && focusSearch) {
+      var inp = document.getElementById('plMobInput');
+      if (inp) {
+        setTimeout(function() {
+          inp.focus();
+        }, 80);
+      }
+    }
+  };
+
+  window.plMobileSearch = function(value) {
+    var q = (value || '').trim();
+    var results = document.getElementById('plMobResults');
+    var menu = document.getElementById('plMobMenu');
+    var inner = document.getElementById('plMobInner');
+    var status = document.getElementById('plMobStatus');
+
+    clearTimeout(mobTimer);
+
+    if (!results || !menu) return;
+
+    if (q.length < 1) {
+      results.classList.remove('active');
+      menu.style.display = 'block';
+      if (inner) inner.innerHTML = '';
+      if (status) status.textContent = '';
+      return;
+    }
+
+    results.classList.add('active');
+    menu.style.display = 'none';
+    if (status) status.textContent = 'Searching...';
+    if (inner) inner.innerHTML = '';
+
+    mobTimer = setTimeout(function() {
+      suggest(q, function(err, products) {
+        if (err) {
+          if (status) status.textContent = 'Press Enter to search';
+          return;
+        }
+
+        if (!products.length) {
+          if (status) status.textContent = 'No results found';
+          if (inner) inner.innerHTML = '';
+          return;
+        }
+
+        if (status) status.textContent = '';
+        if (inner) {
+          inner.innerHTML = products.slice(0, 10).map(function(p) {
+            return renderItem(p, true);
+          }).join('')
+          + '<a class="pl-predict-view-all" style="display:inline-flex" href="/search?q=' + encodeURIComponent(q) + '&type=product&options[prefix]=last">View all results ' + arrowSvg + '</a>';
+        }
+      });
+    }, 250);
+  };
+
+  window.plClearSearch = function() {
+    var inp = document.getElementById('plMobInput');
+
+    if (!inp) return;
+
+    inp.value = '';
+    window.plMobileSearch('');
+    inp.focus();
+  };
+
+  window.plToggleSubmenu = function(btn) {
+    var sub = btn.nextElementSibling;
+
+    if (!sub) return;
+
+    var isOpen = sub.style.display === 'block';
+    sub.style.display = isOpen ? 'none' : 'block';
+    btn.classList.toggle('is-open', !isOpen);
+  };
+
+  document.addEventListener('click', function(e) {
+    var searchBtn = e.target.closest('[data-pl-open-search]');
+
+    if (searchBtn) {
+      e.preventDefault();
+      window.plOpenDesktopSearch();
+      return;
+    }
+
+    if (deskOpen) {
+      var wrap = document.getElementById('plDesktopSearchWrap');
+      var pred = document.getElementById('plDeskPred');
+
+      if (wrap && !wrap.contains(e.target) && pred && !pred.contains(e.target)) {
+        window.plCloseDesktopSearch();
+      }
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && deskOpen) {
+      window.plCloseDesktopSearch();
+    }
+  });
+
+  document.querySelectorAll('.pl-mega').forEach(function(mega) {
+    var tabs = mega.querySelectorAll('[data-pl-mega-tab]');
+    var panels = mega.querySelectorAll('[data-pl-mega-panel]');
+
+    tabs.forEach(function(tab) {
+      tab.addEventListener('mouseenter', function() {
+        var i = tab.getAttribute('data-pl-mega-tab');
+
+        tabs.forEach(function(t) {
+          t.classList.remove('active');
+        });
+
+        panels.forEach(function(p) {
+          p.classList.remove('active');
+        });
+
+        tab.classList.add('active');
+
+        var panel = mega.querySelector('[data-pl-mega-panel="' + i + '"]');
+        if (panel) panel.classList.add('active');
+      });
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "PetLab Style Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "shop_all_text",
+      "label": "Mega menu button text",
+      "default": "Shop All Products"
+    },
+    {
+      "type": "url",
+      "id": "shop_all_link",
+      "label": "Mega menu Shop All Products link"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 60,
+      "max": 220,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 135
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu_left",
+      "name": "Left Menu",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Left menu"
+        }
+      ]
+    },
+    {
+      "type": "menu_right",
+      "name": "Right Menu",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Right menu"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PetLab Style Header"
+    }
+  ]
+}
+{% endschema %}
+

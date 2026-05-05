@@ -1,0 +1,23 @@
+<a href="{{ product.url }}" class="pl-product-card">
+  <div class="pl-product-img">
+    {% if product.featured_image %}
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.title | escape }}"
+        loading="lazy"
+        width="600"
+        height="750"
+      >
+    {% endif %}
+  </div>
+
+  <h3>{{ product.title }}</h3>
+
+  {% if product.metafields.custom.short_description != blank %}
+    <p>{{ product.metafields.custom.short_description }}</p>
+  {% elsif product.description != blank %}
+    <p>{{ product.description | strip_html | truncate: 55 }}</p>
+  {% else %}
+    <p>{{ product.vendor }}</p>
+  {% endif %}
+</a>
