@@ -7,6 +7,7 @@
   --pl-border: #d7d7d2;
 }
 
+/* Header */
 .pl-header {
   position: sticky;
   top: 0;
@@ -43,10 +44,14 @@
 }
 
 .pl-nav-item {
-  position: static;
+  position: relative;
   height: 100%;
   display: flex;
   align-items: center;
+}
+
+.pl-nav-item:has(.pl-mega) {
+  position: static;
 }
 
 .pl-nav-link {
@@ -78,8 +83,8 @@
 .pl-logo a {
   display: flex;
   align-items: center;
-  text-decoration: none;
   color: #111;
+  text-decoration: none;
 }
 
 .pl-logo img {
@@ -92,7 +97,6 @@
 .pl-logo-text {
   font-size: 24px;
   font-weight: 900;
-  color: #111;
 }
 
 .pl-icons {
@@ -102,16 +106,16 @@
 }
 
 .pl-icon {
-  color: #111;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
+  color: #111;
   background: none;
   border: 0;
-  cursor: pointer;
   padding: 0;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .pl-icon svg {
@@ -133,6 +137,7 @@
   text-align: center;
 }
 
+/* Arrow */
 .pl-arrow-icon {
   display: inline-flex;
   align-items: center;
@@ -152,17 +157,7 @@
   transform: rotate(90deg);
 }
 
-.pl-predict-view-all {
-  align-items: center;
-  gap: 4px;
-}
-
-.pl-predict-view-all .pl-arrow-icon svg {
-  width: 18px;
-  height: 18px;
-}
-
-/* Mega */
+/* Mega menu */
 .pl-nav-item:hover > .pl-mega {
   display: block;
 }
@@ -180,14 +175,12 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: none;
-  margin: 0;
   background: #fff;
   display: grid;
   grid-template-columns: 452px minmax(0, 1fr);
   border-radius: 0 0 18px 18px;
   overflow: hidden;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, .18);
+  box-shadow: 0 24px 60px rgba(0,0,0,.18);
   min-height: 520px;
 }
 
@@ -210,7 +203,7 @@
   align-items: center;
   color: #222;
   text-decoration: none;
-  font-size: 26px;
+  font-size: 20px;
   line-height: 1.2;
   font-weight: 700;
   padding: 27px 0;
@@ -237,13 +230,15 @@
 
 .pl-products-wrap {
   min-width: 0;
+  max-width: 1100px;
 }
 
 .pl-products {
-  padding: 40px 36px;
+  padding: 58px 56px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
+  gap: 32px;
+  align-items: start;
 }
 
 .pl-mega-panel {
@@ -260,18 +255,10 @@
     opacity: 0;
     transform: translateX(18px);
   }
-
   to {
     opacity: 1;
     transform: translateX(0);
   }
-}
-
-.pl-mega-empty {
-  grid-column: 1 / -1;
-  margin: 0;
-  font-size: 14px;
-  color: #777;
 }
 
 .pl-product-card {
@@ -283,7 +270,7 @@
 .pl-product-img {
   background: #f4f0f8;
   border-radius: 18px;
-  aspect-ratio: 1 / .78;
+  aspect-ratio: 1 / 1.25;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -302,18 +289,59 @@
 }
 
 .pl-product-card h3 {
-  margin: 24px 0 8px;
-  font-size: 22px;
+  margin: 22px 0 8px;
+  font-size: 18px;
   line-height: 1.18;
   font-weight: 800;
-  text-decoration: none;
 }
 
 .pl-product-card p {
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   color: #4f5158;
   line-height: 1.35;
+}
+
+/* Desktop search */
+.pl-desktop-search-wrap {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  min-height: 100px;
+  background: #fff;
+  z-index: 2147483000;
+  align-items: center;
+  padding: 12px 36px;
+  gap: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,.08);
+}
+
+.pl-desktop-search-wrap.active {
+  display: flex;
+}
+
+.pl-desktop-search-form {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 46px;
+  border: 2px solid #111;
+  border-radius: 999px;
+  padding: 0 20px;
+  gap: 12px;
+  background: #fff;
+}
+
+.pl-desktop-search-input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  font-weight: 500;
+  background: transparent;
+  min-width: 0;
 }
 
 .pl-desktop-search-input:focus,
@@ -322,7 +350,738 @@
   box-shadow: none !important;
 }
 
+.pl-desktop-search-clear,
+.pl-desktop-search-close {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: #111;
+}
+
+.pl-desktop-search-close {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.pl-desktop-predictive {
+  position: fixed;
+  top: 74px;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 20px 50px rgba(0,0,0,.15);
+  border-radius: 0 0 18px 18px;
+  z-index: 2147482999;
+  display: none;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.pl-desktop-predictive.active {
+  display: block;
+}
+
+.pl-desktop-predict-inner {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 24px 36px 30px;
+}
+
+.pl-desktop-predict-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* Mobile header */
+.pl-mobile {
+  display: none;
+}
+
+.pl-mobile-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+}
+
+.pl-hamburger {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.pl-hamburger span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: #111;
+  margin: 5px 0;
+}
+
+/* Offcanvas drawer - applies on all screen sizes */
+/* .pl-drawer-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,.45);
+}
+
+.pl-drawer {
+  position: fixed;
+  top: 0;
+  right: -560px;
+  width: 520px;
+  max-width: 92vw;
+  height: 100dvh;
+  background: #fff;
+  z-index: 10000;
+  transition: right .35s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: -24px 0 60px rgba(0,0,0,.18);
+} */
+
+/* =========================
+   OFFCANVAS Z-INDEX FIX
+   GemPages Safe Layer
+========================= */
+
+.pl-drawer-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0,0,0,.45) !important;
+  z-index: 2147483645 !important;
+}
+
+.pl-drawer {
+  position: fixed !important;
+  top: 0 !important;
+  right: -560px;
+  width: 520px;
+  max-width: 92vw;
+  height: 100dvh;
+  background: #fff;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: -24px 0 60px rgba(0,0,0,.18);
+  transition: right .35s ease;
+  z-index: 2147483646 !important;
+  isolation: isolate;
+}
+
+.pl-drawer.active {
+  right: 0 !important;
+}
+
+.pl-drawer-inner {
+  position: relative;
+  z-index: 2;
+  background: #f5f5f3;
+  min-height: 100%;
+  padding-bottom: 90px;
+}
+
+/* Force drawer content above everything */
+.pl-mobile-menu-title,
+.pl-mobile-search,
+.pl-mobile-menu-card,
+.pl-mobile-products,
+.pl-mobile-secondary-menu,
+.pl-mobile-contact-area {
+  position: relative;
+  z-index: 3;
+}
+
+/* GemPages fix */
+html:has(.pl-drawer.active) .gp-section,
+html:has(.pl-drawer.active) .gp-row,
+html:has(.pl-drawer.active) .gp-column,
+html:has(.pl-drawer.active) .gp-block,
+html:has(.pl-drawer.active) [class*="gp-"] {
+  z-index: 1 !important;
+}
+
+/* Prevent transformed sections from overlapping */
+html:has(.pl-drawer.active) .gp-section *,
+html:has(.pl-drawer.active) .gp-row *,
+html:has(.pl-drawer.active) .gp-column * {
+  z-index: auto;
+}
+
+/* Mobile full width */
+@media (max-width: 989px) {
+  .pl-drawer {
+    width: 100%;
+    max-width: 100%;
+    right: -100%;
+    box-shadow: none;
+  }
+
+  .pl-drawer.active {
+    right: 0 !important;
+  }
+}
+
+.pl-drawer.active {
+  right: 0;
+}
+
+.pl-drawer-inner {
+  background: #f5f5f3;
+  min-height: 100%;
+  padding-bottom: 90px;
+}
+
+.pl-mobile-menu-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 800;
+  padding: 22px 56px;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  background: #fff;
+}
+
+.pl-mobile-menu-title button {
+  position: absolute;
+  right: 22px;
+  top: 15px;
+  background: none;
+  border: 0;
+  font-size: 42px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.pl-mobile-search {
+  padding: 22px 22px 0;
+  background: #f5f5f3;
+}
+
+.pl-search-field {
+  height: 62px;
+  border: 1.5px solid #111;
+  border-radius: 999px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 20px;
+}
+
+.pl-search-field svg {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.pl-search-field input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  font-size: 18px;
+  background: transparent;
+  min-width: 0;
+}
+
+.pl-search-field input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}
+
+.pl-search-clear {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 0;
+  font-size: 34px;
+  line-height: 1;
+  cursor: pointer;
+  color: #555;
+  padding: 0;
+}
+
+.pl-search-clear {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: .2s ease;
+}
+
+.pl-search-field input:not(:placeholder-shown) + .pl-search-clear {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.pl-search-results {
+  display: none;
+  background: #fff;
+  margin: 0 22px;
+  border-radius: 0 0 18px 18px;
+  padding: 18px 24px 24px;
+}
+
+.pl-search-results.active {
+  display: block;
+}
+
+.pl-search-result-item {
+  display: grid;
+  grid-template-columns: 82px 1fr;
+  gap: 16px;
+  align-items: center;
+  text-decoration: none;
+  color: #222;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.pl-search-result-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.pl-search-result-item img {
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+  background: #f4f4f1;
+  border-radius: 10px;
+}
+
+.pl-search-result-item h4 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+a.pl-predict-view-all {
+    display: block;
+    width: 100%;
+    margin-top: 18px;
+    background: var(--pl-green);
+    color: #fff !important;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 16px 20px;
+    font-size: 16px;
+    font-weight: 800;
+    justify-content: center;
+    align-items: center;
+}
+*:focus-visible {
+    box-shadow: none !important;
+}
+
+.pl-price {
+  font-size: 15px;
+}
+
+.pl-price s {
+  color: #888;
+  margin-right: 6px;
+  font-size: 13px;
+}
+
+.pl-price strong {
+  font-weight: 900;
+}
+
+.pl-search-status {
+  padding: 24px 10px;
+  text-align: center;
+  font-size: 16px;
+  color: #aaa;
+}
+
+.pl-mobile-menu-card {
+  margin-top: 8px;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 28px 24px;
+}
+
+.pl-mobile-heading {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 24px;
+}
+
+.pl-mobile-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pl-acc-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 800;
+  border: 0;
+  padding: 17px 0;
+  background: none;
+  cursor: pointer;
+  color: #111;
+  text-decoration: none !important;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.pl-acc-title span {
+  text-decoration: none !important;
+}
+
+.pl-submenu {
+  display: none;
+  padding: 0;
+}
+
+.pl-mobile-products {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 18px;
+  padding: 18px 0 28px;
+}
+
+.pl-mobile-product-card {
+  color: #202020;
+  text-decoration: none;
+}
+
+.pl-mobile-product-img {
+  background: #f4f0f8;
+  border-radius: 10px;
+  aspect-ratio: 4 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.pl-mobile-product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pl-mobile-product-card h4 {
+  margin: 14px 0 6px;
+  font-size: 15px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.pl-mobile-product-card p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.35;
+  color: #555965;
+}
+
+.pl-mobile-shop-all-btn {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  background: var(--pl-green);
+  color: #fff !important;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.pl-mobile-secondary-menu {
+  margin-top: 8px;
+}
+
+.pl-mobile-contact-area {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.pl-mobile-contact-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #111;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.pl-mobile-socials {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pl-mobile-socials a {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #f4f4f1;
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+/* Contact / social desktop */
+.pl-contact-link-item,
+.pl-header-socials {
+  display: flex;
+  align-items: center;
+}
+
+.pl-contact-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #111;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pl-contact-link:hover {
+  color: var(--pl-green);
+}
+
+.pl-header-socials {
+  gap: 10px;
+}
+
+.pl-header-socials a {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #f4f4f1;
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.pl-header-socials a:hover {
+  background: var(--pl-green);
+  color: #fff;
+}
+
+/* Simple dropdown */
+.pl-simple-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 230px;
+  background: #fff;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 18px 45px rgba(0,0,0,.16);
+  padding: 16px;
+  z-index: 9999;
+}
+
+.pl-nav-item:hover > .pl-simple-dropdown {
+  display: block;
+}
+
+.pl-simple-dropdown-link {
+  display: block;
+  color: #111;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 12px 10px;
+  border-radius: 8px;
+}
+
+.pl-simple-dropdown-link:hover {
+  background: #f4f4f1;
+  color: var(--pl-green);
+}
+
+/* Fix desktop search icon size */
+.pl-desktop-search-wrap svg,
+.pl-desktop-search-form svg,
+.pl-icon svg {
+  width: 20px !important;
+  height: 20px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
+  flex-shrink: 0;
+}
+
+/* Mobile search icon */
+.pl-search-field svg {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+/* Prevent giant inherited svg */
+svg {
+  max-width: 100%;
+}
+/* Desktop search result card design */
+.pl-desktop-predictive {
+  top: 90px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: #fff;
+  padding: 0;
+}
+
+.pl-desktop-predict-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 28px 36px 36px;
+}
+
+.pl-desktop-predict-label {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 18px;
+}
+
+.pl-desktop-predict-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.pl-desktop-predict-item {
+  display: block;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #111;
+  box-shadow: 0 8px 28px rgba(0,0,0,.08);
+  border: 1px solid #eee;
+}
+
+.pl-desktop-predict-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f4f4f1;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.pl-desktop-predict-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pl-desktop-predict-item h4 {
+  margin: 14px 14px 6px;
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 800;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pl-predict-price {
+  margin: 0 14px 16px;
+  font-size: 15px;
+  color: #333;
+}
+
+.pl-predict-price s {
+  color: #888;
+  margin-right: 6px;
+}
+
+.pl-predict-price strong {
+  color: #111;
+  font-weight: 900;
+}
+
+.pl-predict-view-all {
+  margin-top: 24px;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  color: var(--pl-green);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+html.pl-search-is-open .pl-desktop-search-wrap {
+  z-index: 2147483647 !important;
+}
+
+html.pl-search-is-open .pl-desktop-predictive {
+  z-index: 2147483646 !important;
+}
+
+html.pl-search-is-open .gp-section,
+html.pl-search-is-open .gp-row,
+html.pl-search-is-open .gp-column,
+html.pl-search-is-open [class*="gp-"] {
+  z-index: 1 !important;
+}
+
+.pl-desktop-predictive {
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(0,0,0,.18);
+}
+
+/* Tablet desktop-search responsive */
+@media (max-width: 1100px) {
+  .pl-desktop-predict-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .pl-desktop-predict-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pl-desktop-predict-inner {
+    padding: 22px;
+  }
+}
+
+/* Desktop responsive */
 @media (max-width: 1300px) {
+  .pl-header-inner {
+    padding: 0 20px;
+    grid-template-columns: minmax(0, 1fr) 130px minmax(0, 1fr);
+  }
+
+  .pl-nav-list {
+    gap: 14px;
+  }
+
+  .pl-nav-link,
+  .pl-contact-link {
+    font-size: 13px;
+  }
+
   .pl-mega-box {
     grid-template-columns: 360px minmax(0, 1fr);
     min-height: 560px;
@@ -342,238 +1101,22 @@
     gap: 20px;
   }
 
-  .pl-product-card h3 {
-    font-size: 18px;
-  }
-
   .pl-product-card p {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
-/* Desktop search */
-.pl-desktop-search-wrap {
-  display: none;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  min-height: 74px;
-  background: #fff;
-  z-index: 2147483000;
-  align-items: center;
-  padding: 12px 36px;
-  gap: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
-}
-
-.pl-desktop-search-wrap.active {
-  display: flex;
-}
-
-.pl-desktop-search-form {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  height: 46px;
-  border: 2px solid #111;
-  border-radius: 999px;
-  padding: 0 20px;
-  gap: 12px;
-  background: #fff;
-}
-
-.pl-desktop-search-form svg {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  color: #111;
-}
-
-.pl-desktop-search-input {
-  flex: 1;
-  border: 0;
-  outline: 0;
-  font-size: 16px;
-  font-weight: 500;
-  background: transparent;
-  min-width: 0;
-}
-
-.pl-desktop-search-input::placeholder {
-  color: #999;
-}
-
-.pl-desktop-search-clear {
-  background: none;
-  border: 0;
-  cursor: pointer;
-  font-size: 22px;
-  line-height: 1;
-  color: #555;
-  padding: 0;
-  display: none;
-}
-
-.pl-desktop-search-clear.visible {
-  display: block;
-}
-
-.pl-desktop-search-close {
-  background: none;
-  border: 0;
-  cursor: pointer;
-  font-size: 34px;
-  line-height: 1;
-  color: #111;
-  padding: 0 0 0 8px;
-  flex-shrink: 0;
-}
-
-.pl-desktop-predictive {
-  position: fixed;
-  top: 74px;
-  left: 0;
-  width: 100%;
-  background: #fff;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, .15);
-  border-radius: 0 0 18px 18px;
-  z-index: 2147482999;
-  display: none;
-  max-height: 500px;
-  overflow-y: auto;
-}
-
-.pl-desktop-predictive.active {
-  display: block;
-}
-
-.pl-desktop-predict-inner {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 24px 36px 30px;
-}
-
-.pl-desktop-predict-label {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: #888;
-  margin-bottom: 16px;
-}
-
-.pl-desktop-predict-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.pl-desktop-predict-item {
-  text-decoration: none;
-  color: #222;
-  display: block;
-}
-
-.pl-desktop-predict-img {
-  background: #f4f0f8;
-  border-radius: 12px;
-  aspect-ratio: 1;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.pl-desktop-predict-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transition: transform .3s ease;
-}
-
-.pl-desktop-predict-item:hover img {
-  transform: scale(1.04);
-}
-
-.pl-desktop-predict-item h4 {
-  margin: 10px 0 4px;
-  font-size: 14px;
-  font-weight: 800;
-  line-height: 1.25;
-}
-
-.pl-predict-price {
-  font-size: 13px;
-  color: #555;
-}
-
-.pl-predict-price s {
-  margin-right: 4px;
-  color: #999;
-}
-
-.pl-predict-price strong {
-  color: #111;
-  font-weight: 800;
-}
-
-.pl-desktop-predict-status {
-  padding: 20px 0;
-  font-size: 14px;
-  color: #aaa;
-  text-align: center;
-}
-
-.pl-predict-view-all {
-  display: none;
-  margin-top: 18px;
-  font-size: 13px;
-  font-weight: 800;
-  color: var(--pl-green);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* Mobile */
-.pl-mobile {
-  display: none;
-}
-
-.pl-drawer-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, .55);
-  z-index: 199;
-}
-
-.pl-drawer {
-  position: fixed;
-  right: -100%;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  z-index: 200;
-  transition: .35s ease;
-  overflow: auto;
-}
-
-.pl-drawer.active {
-  right: 0;
-}
-
+/* Mobile header activation */
 @media (max-width: 989px) {
   .pl-desktop {
-    display: none;
+    display: none !important;
   }
 
   .pl-mobile {
     background: #fff;
     padding: 10px 24px 16px;
     min-height: 70px;
-    display: grid;
+    display: grid !important;
     grid-template-columns: 1fr auto;
     align-items: center;
   }
@@ -582,260 +1125,43 @@
     justify-content: flex-start;
   }
 
-  .pl-mobile-actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 16px;
+  .pl-drawer {
+    width: 100%;
+    max-width: none;
+    right: -100%;
+    box-shadow: none;
   }
 
-  .pl-hamburger {
-    background: none;
-    border: 0;
-    padding: 0;
-    cursor: pointer;
+  .pl-drawer.active {
+    right: 0;
   }
+}
 
-  .pl-hamburger span {
-    display: block;
-    width: 28px;
-    height: 3px;
-    background: #111;
-    margin: 5px 0;
-  }
-
-  .pl-drawer-inner {
-    background: #f5f5f3;
-    min-height: 100%;
-  }
-
-  .pl-mobile-menu-title {
-    text-align: center;
-    font-size: 24px;
-    font-weight: 800;
-    padding: 22px 0;
-    border-bottom: 1px solid #eee;
-    position: relative;
-    background: #fff;
-  }
-
-  .pl-mobile-menu-title button {
-    position: absolute;
-    right: 22px;
-    top: 15px;
-    background: none;
-    border: 0;
-    font-size: 42px;
-    line-height: 1;
-    cursor: pointer;
-  }
-
-  .pl-mobile-search {
-    padding: 22px 22px 0;
-    background: #f5f5f3;
-  }
-
-  .pl-search-field {
-    height: 62px;
-    border: 1.5px solid #111;
-    border-radius: 999px;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 0 20px;
-  }
-
-  .pl-search-field svg {
-    width: 26px;
-    height: 26px;
-    flex-shrink: 0;
-  }
-
-  .pl-search-field input {
-    flex: 1;
-    border: 0;
-    outline: 0;
-    font-size: 20px;
-    background: transparent;
-    min-width: 0;
-  }
-
-  .pl-search-field input[type="search"]::-webkit-search-cancel-button {
-    display: none;
-  }
-
-  .pl-search-clear {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: 0;
-    font-size: 34px;
-    line-height: 1;
-    cursor: pointer;
-    color: #555;
-    padding: 0;
-  }
-
-  .pl-search-results {
-    display: none;
-    background: #fff;
-    margin: 0 22px;
-    border-radius: 0 0 18px 18px;
-    padding: 18px 24px 24px;
-  }
-
-  .pl-search-results.active {
-    display: block;
-  }
-
-  .pl-search-result-item {
-    display: grid;
-    grid-template-columns: 90px 1fr;
-    gap: 18px;
-    align-items: center;
-    text-decoration: none;
-    color: #222;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #f0f0f0;
-  }
-
-  .pl-search-result-item:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: 0;
-  }
-
-  .pl-search-result-item img {
-    width: 90px;
-    height: 90px;
-    object-fit: contain;
-    background: #f4f4f1;
-    border-radius: 10px;
-  }
-
-  .pl-search-result-item h4 {
-    margin: 0 0 8px;
-    font-size: 18px;
-    line-height: 1.25;
-    font-weight: 800;
-  }
-
-  .pl-price {
-    font-size: 18px;
-  }
-
-  .pl-price s {
-    color: #888;
-    margin-right: 6px;
-    font-size: 15px;
-  }
-
-  .pl-price strong {
-    font-weight: 900;
-  }
-
-  .pl-search-status {
-    padding: 24px 10px;
-    text-align: center;
-    font-size: 16px;
-    color: #aaa;
+/* Small phone */
+@media (max-width: 480px) {
+  .pl-mobile {
+    padding: 10px 18px 14px;
   }
 
   .pl-mobile-menu-card {
-    margin-top: 8px;
-    background: #fff;
-    border-radius: 20px 20px 0 0;
-    padding: 28px 24px;
-  }
-
-  .pl-mobile-heading {
-    font-size: 26px;
-    font-weight: 800;
-    margin: 0 0 24px;
-  }
-
-  .pl-mobile-menu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .pl-acc-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    font-size: 20px;
-    font-weight: 800;
-    border: 0;
-    padding: 18px 0;
-    background: none;
-    cursor: pointer;
-    color: #111;
-    text-decoration: none !important;
-    border-bottom: 1px solid #f0f0f0;
-  }
-
-  .pl-acc-title span {
-    text-decoration: none !important;
-  }
-
-  .pl-submenu {
-    display: none;
-    padding: 0;
+    padding: 24px 20px;
   }
 
   .pl-mobile-products {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px 24px;
-    padding: 6px 0 24px;
+    gap: 22px 14px;
   }
 
-  .pl-mobile-product-card {
-    text-decoration: none;
-    color: #202020;
+  .pl-acc-title {
+    font-size: 17px;
   }
 
-  .pl-mobile-product-img {
-    background: #f4f0f8;
-    border-radius: 16px;
-    aspect-ratio: 1 / .78;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+  .pl-search-result-item {
+    grid-template-columns: 72px 1fr;
   }
 
-  .pl-mobile-product-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .pl-mobile-product-card h4 {
-    margin: 18px 0 6px;
-    font-size: 16px;
-    line-height: 1.2;
-    font-weight: 800;
-  }
-
-  .pl-mobile-product-card p {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.35;
-    color: #555965;
-  }
-
-  .pl-desktop-search-input:focus,
-  .pl-desktop-search-input:focus-visible {
-    outline: none !important;
-    box-shadow: none !important;
+  .pl-search-result-item img {
+    width: 72px;
+    height: 72px;
   }
 }
 {%- endstyle -%}
@@ -862,11 +1188,12 @@
                     {% render 'pl-chevron' %}
                   {% endif %}
                 </a>
-               {% render 'pl-mega-menu',
-  link: link,
-  shop_all_link: section.settings.shop_all_link,
-  shop_all_text: section.settings.shop_all_text
-%}
+
+                {% render 'pl-mega-menu',
+                  link: link,
+                  shop_all_link: section.settings.shop_all_link,
+                  shop_all_text: section.settings.shop_all_text
+                %}
               </li>
             {% endfor %}
           {% endif %}
@@ -890,32 +1217,113 @@
 
     <nav class="pl-nav-right">
       <ul class="pl-nav-list">
-        {% for block in section.blocks %}
-          {% if block.type == 'menu_right' and block.settings.menu != blank %}
-            {% for link in block.settings.menu.links %}
-              <li class="pl-nav-item">
-                <a href="{{ link.url }}" class="pl-nav-link">
-                  {{ link.title }}
-                  {% if link.links != blank %}
-                    {% render 'pl-chevron' %}
-                  {% endif %}
-                </a>
-                {% render 'pl-mega-menu', link: link %}
-              </li>
-            {% endfor %}
+      {% for block in section.blocks %}
+  {% if block.type == 'menu_right' and block.settings.menu != blank %}
+    {% for link in block.settings.menu.links %}
+      <li class="pl-nav-item {% if link.links != blank %}has-dropdown{% endif %}">
+        <a href="{{ link.url }}" class="pl-nav-link">
+          {{ link.title }}
+          {% if link.links != blank %}
+            {% render 'pl-chevron' %}
           {% endif %}
-        {% endfor %}
+        </a>
 
-        <li class="pl-icons">
-          <button type="button" class="pl-icon" aria-label="Search" data-pl-open-search onclick="window.plOpenDesktopSearch()">
-            {% render 'pl-search-icon' %}
-          </button>
+        {% if link.links != blank %}
+          {% if link.title contains 'Account' or link.title contains 'Help' %}
+            <div class="pl-simple-dropdown">
+              {% for child_link in link.links %}
+                <a href="{{ child_link.url }}" class="pl-simple-dropdown-link">
+                  {{ child_link.title }}
+                </a>
+              {% endfor %}
+            </div>
+          {% else %}
+            {% render 'pl-mega-menu',
+              link: link,
+              shop_all_link: section.settings.shop_all_link,
+              shop_all_text: section.settings.shop_all_text
+            %}
+          {% endif %}
+        {% endif %}
+      </li>
+    {% endfor %}
+  {% endif %}
+{% endfor %}
 
-          <a href="{{ routes.cart_url }}" class="pl-icon" aria-label="Cart">
-            {% render 'pl-cart-icon' %}
-            <span class="pl-cart-count">{{ cart.item_count }}</span>
-          </a>
-        </li>
+
+        {% if section.settings.show_contact_link %}
+  <li class="pl-contact-link-item">
+    <a
+      href="{{ section.settings.contact_link | default: '/pages/contact' }}"
+      class="pl-contact-link"
+      aria-label="{{ section.settings.contact_label | escape }}"
+    >
+      {% case section.settings.contact_icon %}
+        {% when 'email' %}
+          <i class="fas fa-envelope"></i>
+        {% when 'phone' %}
+          <i class="fas fa-phone"></i>
+        {% when 'chat' %}
+          <i class="fas fa-comment-dots"></i>
+      {% endcase %}
+
+      <span>{{ section.settings.contact_label }}</span>
+    </a>
+  </li>
+{% endif %}
+
+{% if section.settings.show_social_icons %}
+  <li class="pl-header-socials">
+    {% if section.settings.facebook_url != blank %}
+      <a href="{{ section.settings.facebook_url }}" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    {% endif %}
+
+    {% if section.settings.instagram_url != blank %}
+      <a href="{{ section.settings.instagram_url }}" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+    {% endif %}
+
+    {% if section.settings.email_url != blank %}
+      <a href="{{ section.settings.email_url }}" aria-label="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+    {% endif %}
+  </li>
+{% endif %}
+
+       <li class="pl-icons">
+
+  <!-- Search -->
+  <button
+    type="button"
+    class="pl-icon"
+    aria-label="Search"
+    data-pl-open-search
+    onclick="window.plOpenDesktopSearch()">
+    {% render 'pl-search-icon' %}
+  </button>
+
+  <!-- Account -->
+  <a
+    href="{{ routes.account_url }}"
+    class="pl-icon"
+    aria-label="Account">
+    {% render 'pl-icon-account' %}
+  </a>
+
+  <!-- Cart -->
+  <a
+    href="{{ routes.cart_url }}"
+    class="pl-icon"
+    aria-label="Cart">
+    {% render 'pl-cart-icon' %}
+    <span class="pl-cart-count">{{ cart.item_count }}</span>
+  </a>
+
+</li>
       </ul>
     </nav>
   </div>
@@ -1006,98 +1414,253 @@
 
     <div class="pl-mobile-menu-card" id="plMobMenu">
       <h2 class="pl-mobile-heading">Shop Now</h2>
+
       <ul class="pl-mobile-menu">
         {% for block in section.blocks %}
-          {% if block.type == 'menu_left' or block.type == 'menu_right' %}
-            {% if block.settings.menu != blank %}
-              {% for link in block.settings.menu.links %}
-                <li>
-                  {% if link.links != blank %}
-                    <button type="button" class="pl-acc-title" onclick="window.plToggleSubmenu(this)">
-                      {{ link.title }}
-                      {{ pl_arrow_svg }}
-                    </button>
+          {% if block.type == 'menu_left' and block.settings.menu != blank %}
+            {% for link in block.settings.menu.links %}
+              <li>
+                {% if link.links != blank %}
+                  <button type="button" class="pl-acc-title" onclick="window.plToggleSubmenu(this)">
+                    {{ link.title }}
+                    {{ pl_arrow_svg }}
+                  </button>
 
-                    <div class="pl-submenu">
-                      {% for child_link in link.links %}
-                        {% if child_link.type == 'collection_link' and child_link.object != blank %}
-                          <button type="button" class="pl-acc-title" onclick="window.plToggleSubmenu(this)" style="font-size:20px;">
-                            {{ child_link.title }}
-                            {{ pl_arrow_svg }}
-                          </button>
+                  <div class="pl-submenu">
+                    {% for child_link in link.links %}
+                      {% if child_link.type == 'collection_link' and child_link.object != blank %}
+                        <button type="button" class="pl-acc-title" onclick="window.plToggleSubmenu(this)" style="font-size:20px;">
+                          {{ child_link.title }}
+                          {{ pl_arrow_svg }}
+                        </button>
 
-                          <div class="pl-submenu">
-                            <div class="pl-mobile-products">
-                              {% for product in child_link.object.products limit: 4 %}
-                                <a href="{{ product.url }}" class="pl-mobile-product-card">
-                                  <div class="pl-mobile-product-img">
-                                    {% if product.featured_image %}
-                                      <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
-                                    {% endif %}
-                                  </div>
-                                  <h4>{{ product.title }}</h4>
-                                  <p>{{ product.description | strip_html | truncate: 55 }}</p>
-                                </a>
-                              {% endfor %}
-                            </div>
-                          </div>
-                        {% elsif child_link.links != blank %}
-                          <button type="button" class="pl-acc-title" onclick="window.plToggleSubmenu(this)" style="font-size:20px;">
-                            {{ child_link.title }}
-                            {{ pl_arrow_svg }}
-                          </button>
+                 <div class="pl-submenu">
+                  <div class="pl-mobile-products">
 
-                          <div class="pl-submenu">
-                            {% for grand_link in child_link.links %}
-                              {% if grand_link.type == 'collection_link' and grand_link.object != blank %}
-                                <button type="button" class="pl-acc-title" onclick="window.plToggleSubmenu(this)" style="font-size:18px;">
-                                  {{ grand_link.title }}
-                                  {{ pl_arrow_svg }}
-                                </button>
+                    {% for product in child_link.object.products limit: 4 %}
 
-                                <div class="pl-submenu">
-                                  <div class="pl-mobile-products">
-                                    {% for product in grand_link.object.products limit: 4 %}
-                                      <a href="{{ product.url }}" class="pl-mobile-product-card">
-                                        <div class="pl-mobile-product-img">
-                                          {% if product.featured_image %}
-                                            <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
-                                          {% endif %}
-                                        </div>
-                                        <h4>{{ product.title }}</h4>
-                                        <p>{{ product.description | strip_html | truncate: 55 }}</p>
-                                      </a>
-                                    {% endfor %}
-                                  </div>
-                                </div>
-                              {% else %}
-                                <a href="{{ grand_link.url }}" class="pl-acc-title" style="font-size:18px;">
-                                  {{ grand_link.title }}
-                                  {{ pl_arrow_svg }}
-                                </a>
-                              {% endif %}
-                            {% endfor %}
-                          </div>
+                      <a href="{{ product.url }}" class="pl-mobile-product-card">
+
+                        <div class="pl-mobile-product-img">
+
+                          {% if product.metafields.custom.card_image != blank %}
+
+                            <img
+                              src="{{ product.metafields.custom.card_image | image_url: width: 500 }}"
+                              alt="{{ product.title | escape }}"
+                              loading="lazy"
+                              width="500"
+                              height="625"
+                            >
+
+                          {% elsif product.featured_image %}
+
+                            <img
+                              src="{{ product.featured_image | image_url: width: 500 }}"
+                              alt="{{ product.title | escape }}"
+                              loading="lazy"
+                              width="500"
+                              height="625"
+                            >
+
+                          {% endif %}
+
+                        </div>
+
+                        <h4>{{ product.title | truncate: 20 }}</h4>
+
+                        {% if product.metafields.custom.short_description != blank %}
+
+                          <p>
+                            {{ product.metafields.custom.short_description | strip_html | truncate: 40 }}
+                          </p>
+
+                        {% elsif product.description != blank %}
+
+                          <p>
+                            {{ product.description | strip_html | truncate: 40 }}
+                          </p>
+
                         {% else %}
-                          <a href="{{ child_link.url }}" class="pl-acc-title" style="font-size:20px;">
-                            {{ child_link.title }}
-                            {{ pl_arrow_svg }}
-                          </a>
+
+                          <p>
+                            {{ product.vendor | truncate: 44 }}
+                          </p>
+
                         {% endif %}
-                      {% endfor %}
-                    </div>
-                  {% else %}
-                    <a href="{{ link.url }}" class="pl-acc-title">
-                      {{ link.title }}
-                      {{ pl_arrow_svg }}
-                    </a>
-                  {% endif %}
-                </li>
-              {% endfor %}
-            {% endif %}
+
+                      </a>
+
+                    {% endfor %}
+
+                  </div>
+                </div>
+                      {% elsif child_link.links != blank %}
+                        <button type="button" class="pl-acc-title" onclick="window.plToggleSubmenu(this)" style="font-size:20px;">
+                          {{ child_link.title }}
+                          {{ pl_arrow_svg }}
+                        </button>
+
+                        <div class="pl-submenu">
+                          {% for grand_link in child_link.links %}
+                            {% if grand_link.type == 'collection_link' and grand_link.object != blank %}
+                              <button type="button" class="pl-acc-title" onclick="window.plToggleSubmenu(this)" style="font-size:18px;">
+                                {{ grand_link.title }}
+                                {{ pl_arrow_svg }}
+                              </button>
+
+                              <div class="pl-submenu">
+                                <div class="pl-mobile-products">
+                                  {% for product in grand_link.object.products limit: 4 %}
+                                    <a href="{{ product.url }}" class="pl-mobile-product-card">
+                                      <div class="pl-mobile-product-img">
+                                        {% if product.featured_image %}
+                                          <img
+                                            src="{{ product.featured_image | image_url: width: 500 }}"
+                                            alt="{{ product.title | escape }}"
+                                            loading="lazy"
+                                          >
+                                        {% endif %}
+                                      </div>
+
+                                      <h4>{{ product.title | truncate: 28 }}</h4>
+
+                                      {% if product.metafields.custom.short_description != blank %}
+                                        <p>{{ product.metafields.custom.short_description | strip_html | truncate: 44 }}</p>
+                                      {% elsif product.description != blank %}
+                                        <p>{{ product.description | strip_html | truncate: 44 }}</p>
+                                      {% else %}
+                                        <p>{{ product.vendor | truncate: 44 }}</p>
+                                      {% endif %}
+                                    </a>
+                                  {% endfor %}
+                                </div>
+                              </div>
+                            {% else %}
+                              <a href="{{ grand_link.url }}" class="pl-acc-title" style="font-size:18px;">
+                                {{ grand_link.title }}
+                              </a>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                      {% else %}
+                        <a href="{{ child_link.url }}" class="pl-acc-title" style="font-size:20px;">
+                          {{ child_link.title }}
+                        </a>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  <a href="{{ link.url }}" class="pl-acc-title">
+                    {{ link.title }}
+                  </a>
+                {% endif %}
+              </li>
+            {% endfor %}
           {% endif %}
         {% endfor %}
       </ul>
+
+      <a href="{{ section.settings.shop_all_link | default: routes.all_products_collection_url }}" class="pl-mobile-shop-all-btn">
+        {{ section.settings.shop_all_text | default: 'Shop All Products' }}
+      </a>
+    </div>
+
+    <div class="pl-mobile-menu-card pl-mobile-secondary-menu" id="plMobSecondaryMenu">
+      <ul class="pl-mobile-menu">
+        {% for block in section.blocks %}
+          {% if block.type == 'menu_right' and block.settings.menu != blank %}
+            {% for link in block.settings.menu.links %}
+              <li>
+                {% if link.links != blank %}
+                  <button type="button" class="pl-acc-title" onclick="window.plToggleSubmenu(this)">
+                    {{ link.title }}
+                    {{ pl_arrow_svg }}
+                  </button>
+
+                  <div class="pl-submenu">
+                    {% for child_link in link.links %}
+                      <a href="{{ child_link.url }}" class="pl-acc-title" style="font-size:18px;">
+                        {{ child_link.title }}
+                      </a>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  <a href="{{ link.url }}" class="pl-acc-title">
+                    {{ link.title }}
+                  </a>
+                {% endif %}
+              </li>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+
+      {% if section.settings.show_contact_link or section.settings.show_social_icons %}
+        <div class="pl-mobile-contact-area">
+          {% if section.settings.show_contact_link %}
+            <a
+              href="{{ section.settings.contact_link | default: '/pages/contact' }}"
+              class="pl-mobile-contact-link"
+              aria-label="{{ section.settings.contact_label | escape }}"
+            >
+              {% case section.settings.contact_icon %}
+                {% when 'email' %}
+                  <i class="fas fa-envelope"></i>
+                {% when 'phone' %}
+                  <i class="fas fa-phone"></i>
+                {% when 'chat' %}
+                  <i class="fas fa-comment-dots"></i>
+              {% endcase %}
+
+              <span>{{ section.settings.contact_label }}</span>
+            </a>
+          {% endif %}
+
+                  <!-- Account/Login -->
+          {% if customer %}
+            <a
+              href="{{ routes.account_url }}"
+              class="pl-mobile-contact-link pl-mobile-account-link"
+              aria-label="My Account"
+            >
+              <i class="fas fa-user-circle"></i>
+              <span>My Account</span>
+            </a>
+          {% else %}
+            <a
+              href="{{ routes.account_login_url }}"
+              class="pl-mobile-contact-link pl-mobile-account-link"
+              aria-label="Login"
+            >
+              <i class="fas fa-user"></i>
+              <span>Login</span>
+            </a>
+          {% endif %}
+
+          {% if section.settings.show_social_icons %}
+            <div class="pl-mobile-socials">
+              {% if section.settings.facebook_url != blank %}
+                <a href="{{ section.settings.facebook_url }}" target="_blank" aria-label="Facebook">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+              {% endif %}
+
+              {% if section.settings.instagram_url != blank %}
+                <a href="{{ section.settings.instagram_url }}" target="_blank" aria-label="Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              {% endif %}
+
+              {% if section.settings.email_url != blank %}
+                <a href="{{ section.settings.email_url }}" aria-label="Email">
+                  <i class="fas fa-envelope"></i>
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -1314,6 +1877,7 @@
     var q = (value || '').trim();
     var results = document.getElementById('plMobResults');
     var menu = document.getElementById('plMobMenu');
+    var secondaryMenu = document.getElementById('plMobSecondaryMenu');
     var inner = document.getElementById('plMobInner');
     var status = document.getElementById('plMobStatus');
 
@@ -1324,6 +1888,7 @@
     if (q.length < 1) {
       results.classList.remove('active');
       menu.style.display = 'block';
+      if (secondaryMenu) secondaryMenu.style.display = 'block';
       if (inner) inner.innerHTML = '';
       if (status) status.textContent = '';
       return;
@@ -1331,6 +1896,7 @@
 
     results.classList.add('active');
     menu.style.display = 'none';
+    if (secondaryMenu) secondaryMenu.style.display = 'none';
     if (status) status.textContent = 'Searching...';
     if (inner) inner.innerHTML = '';
 
@@ -1458,7 +2024,65 @@
       "unit": "px",
       "label": "Logo width",
       "default": 135
-    }
+    },
+    {
+  "type": "header",
+  "content": "Header Contact"
+},
+{
+  "type": "checkbox",
+  "id": "show_contact_link",
+  "label": "Show contact link",
+  "default": true
+},
+{
+  "type": "text",
+  "id": "contact_label",
+  "label": "Contact label",
+  "default": "Get in Touch"
+},
+{
+  "type": "url",
+  "id": "contact_link",
+  "label": "Contact link"
+},
+{
+  "type": "select",
+  "id": "contact_icon",
+  "label": "Contact icon",
+  "default": "email",
+  "options": [
+    { "value": "email", "label": "Email" },
+    { "value": "phone", "label": "Phone" },
+    { "value": "chat", "label": "Chat" },
+    { "value": "none", "label": "None" }
+  ]
+},
+{
+  "type": "header",
+  "content": "Header Social"
+},
+{
+  "type": "checkbox",
+  "id": "show_social_icons",
+  "label": "Show social icons",
+  "default": false
+},
+{
+  "type": "url",
+  "id": "facebook_url",
+  "label": "Facebook URL"
+},
+{
+  "type": "url",
+  "id": "instagram_url",
+  "label": "Instagram URL"
+},
+{
+  "type": "url",
+  "id": "email_url",
+  "label": "Email URL"
+}
   ],
   "blocks": [
     {
@@ -1493,4 +2117,3 @@
   ]
 }
 {% endschema %}
-

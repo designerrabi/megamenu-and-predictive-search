@@ -1,23 +1,42 @@
 <a href="{{ product.url }}" class="pl-product-card">
+
   <div class="pl-product-img">
-    {% if product.featured_image %}
+
+    {% if product.metafields.custom.card_image != blank %}
+
       <img
-        src="{{ product.featured_image | image_url: width: 600 }}"
+        src="{{ product.metafields.custom.card_image | image_url: width: 700 }}"
         alt="{{ product.title | escape }}"
         loading="lazy"
-        width="600"
-        height="750"
+        width="700"
+        height="875"
       >
+
+    {% elsif product.featured_image %}
+
+      <img
+        src="{{ product.featured_image | image_url: width: 700 }}"
+        alt="{{ product.title | escape }}"
+        loading="lazy"
+        width="700"
+        height="875"
+      >
+
     {% endif %}
+
   </div>
 
-  <h3>{{ product.title }}</h3>
+  <h3>{{ product.title | truncate: 20 }}</h3>
 
   {% if product.metafields.custom.short_description != blank %}
-    <p>{{ product.metafields.custom.short_description }}</p>
+    <p>{{ product.metafields.custom.short_description | strip_html | truncate: 40 }}</p>
+
   {% elsif product.description != blank %}
-    <p>{{ product.description | strip_html | truncate: 55 }}</p>
+    <p>{{ product.description | strip_html | truncate: 40 }}</p>
+
   {% else %}
-    <p>{{ product.vendor }}</p>
+    <p>{{ product.vendor | truncate: 58 }}</p>
+
   {% endif %}
+
 </a>
